@@ -17,3 +17,4 @@ Route::get('/', function () {
 
 
 Route::resource('/actor','ActorController');
+Route::resource('/movie','MovieController');

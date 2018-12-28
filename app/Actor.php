@@ -4,13 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Actor extends Model
 {
-    
-    public function favoriteMovie()
-    {
-        return $this->hasOne(Movie::class);
+    public function movies(){
+        return $this->belongsToMany(Movie::class);
     }
-
-
+    
 }
