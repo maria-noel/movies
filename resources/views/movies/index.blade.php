@@ -8,7 +8,13 @@
             <li>
                 <a href="movie/{{ $movie->id }}">
                     {{ $movie->title }} 
+
                 </a>
+            </li>
+            <li>
+                
+                {{ $movie->genre['name'] }} 
+                
             </li>
         </ul>
     @endforeach

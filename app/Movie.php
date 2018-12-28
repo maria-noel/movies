@@ -10,7 +10,8 @@ class Movie extends Model
 
     public function genre()
     {
-        return $this->belongsTo(Genre::class, 'genre_id');
+        return $this->belongsTo('App\Genre');
     }
+    
 
 }
