@@ -36,10 +36,20 @@ class ActorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        dd($request);
-        // Store everything on the actors table
+
+        // validate
+       $attributes = request()->validate([
+            'first_name' => ['required', 'min:3'],
+            'last_name' => ['required', 'min:3']
+
+        ]);
+
+        Actor::create($attributes);
+
+        return redirect('/actor');
+
     }
 
     /**
@@ -62,29 +72,41 @@ class ActorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $actor = Actor::find($id);
+        return view('actors/edit', compact('actor'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        //
-    }
+        $actor = Actor::find($id);
 
+        $actor->first_name = request('first_name');
+        $actor->last_name = request('last_name');
+
+        $actor->save();
+
+        return redirect('/actor');
+    }
+    
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
     public function destroy($id)
     {
-        //
+        $actor = Actor::find($id);
+        
+        $actor->delete($id);
+
+        return redirect('/actor');
+        
     }
 }

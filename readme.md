@@ -71,7 +71,17 @@ docker-compose exec mysql bash
 mysql -u root -p
 
 alter user 'username'@'localhost' identified with mysql_native_password by 'password';
+FLUSH PRIVILEGES;
+exit;
 ```
+Restart del container
 
 Las migraciones se realizaron por medio del plugin  [Xethron](https://github.com/Xethron/migrations-generator)
 
+## Para clonar este repo
+
+```
+git clone
+
+
+```
