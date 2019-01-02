@@ -1,129 +1,115 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- CSRF Token -->
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel {{ app()->version() }}</title>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <title>{{ config('app.name') }}</title>
 
-        <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-            .full-height {
-                height: 100vh;
-            }
+    <!-- Styles -->
+    <style>
+        html,
+        body {
+            background-color: #fff;
+            color: #636b6f;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 100;
+            height: 100vh;
+            margin: 0;
+        }
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+        .full-height {
+            height: 100vh;
+        }
 
-            .position-ref {
-                position: relative;
-            }
+        .flex-center {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+        .position-ref {
+            position: relative;
+        }
 
-            .content {
-                text-align: center;
-            }
+        .top-right {
+            position: absolute;
+            right: 10px;
+            top: 18px;
+        }
 
-            .title {
-                font-size: 84px;
-            }
+        .content {
+            text-align: center;
+        }
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+        .title {
+            font-size: 84px;
+        }
 
-            .versioninfo {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-            }
+        .links>a {
+            color: #636b6f;
+            padding: 0 25px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
 
-            .framwork_title {
-                font-weight: 600;
-                padding-top: 20px;
-            }
+        .versioninfo {
+            color: #636b6f;
+            padding: 0 25px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .1rem;
+            text-decoration: none;
+        }
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
-            @endif
+        .framwork_title {
+            font-weight: 600;
+            padding-top: 20px;
+        }
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                    <p class="versioninfo">Version {{ app()->version() }}</p>
-                </div>
+        .m-b-md {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-
-                <div class="foundation_button_test">
-                    <p class="framwork_title">Bulma v0.7.2</p>
-                    <p class="framwork_title">Bulma Extension v3.0.0</p>
-
-                    <div class="block">
-                        <a class="button is-primary">Primary</a>
-                        <a class="button is-info">Info</a>
-                        <a class="button is-success">Success</a>
-                        <a class="button is-warning">Warning</a>
-                        <a class="button is-danger">Danger</a>
-                    </div>
-                </div>
-            </div>
+<body>
+    <div class="flex-center position-ref full-height">
+        @if (Route::has('login'))
+        <div class="top-right links">
+            @if (Auth::check())
+            <a href="{{ url('/home') }}">Home</a> @else
+            <a href="{{ url('/login') }}">Login</a>
+            <a href="{{ url('/register') }}">Register</a> @endif
         </div>
-    </body>
+        @endif
+
+        <div class="content">
+            <div class="title m-b-md">
+                    {{ config('app.name') }}
+            </div>
+
+            <div class="links">
+                <a href="movies">Movies</a>
+                <a href="actors">Actors</a>
+            </div>
+
+        </div>
+    </div>
+</body>
+
 </html>

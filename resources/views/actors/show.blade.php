@@ -2,7 +2,7 @@
 @section('title', 'Actors | Create ') 
 @section('section-title', 'View a particular actor/actress
 ') 
-@section('content') 
+@section('content')
 
 <div class="box">
     <article class="media">
@@ -18,12 +18,26 @@
                 </p>
                 <p>
                     <span class="tag"> Rating </span> {{ $actor->rating }}
-                    
+
                 </p>
+
+                @if ($actor->movies->count())
+                <div>
+                    <ul> Actuó en:  
+                        @foreach ($actor->movies as $movie)
+                        <li>
+                            {{ $movie->title }}
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+
+
+                @endif
             </div>
-            
+
         </div>
-        <h6><a href="/actor/{{ $actor->id }}/edit" class="button is-link">Edit</a> </h6>
+        <h6><a href="/actors/{{ $actor->id }}/edit" class="button is-link">Edit</a> </h6>
     </article>
 </div>
 @endsection

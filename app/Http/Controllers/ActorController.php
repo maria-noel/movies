@@ -14,7 +14,6 @@ class ActorController extends Controller
      */
     public function index()
     {
-
         $actors = Actor::all();
 
         return view('actors/index', compact('actors'));
@@ -48,7 +47,7 @@ class ActorController extends Controller
 
         Actor::create($attributes);
 
-        return redirect('/actor');
+        return redirect('/actors');
 
     }
 
@@ -91,7 +90,7 @@ class ActorController extends Controller
 
         $actor->save();
 
-        return redirect('/actor');
+        return redirect('/actors');
     }
     
     /**
@@ -106,7 +105,7 @@ class ActorController extends Controller
         
         $actor->delete($id);
 
-        return redirect('/actor');
+        return redirect('/actors');
         
     }
 }

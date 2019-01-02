@@ -36,18 +36,21 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
-     * Display the specified resource.
+     * Shows a particular movie
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param [int] $id
+     * @return void
      */
     public function show($id)
     {
-        //
+        $movie = Movie::find($id);
+       
+        return view('movies/show', compact('movie'));
+
     }
 
     /**

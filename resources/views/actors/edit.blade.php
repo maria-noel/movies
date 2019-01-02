@@ -3,7 +3,7 @@
 @section('section-title', 'EDIT ') 
 @section('content')
 
-<form action="/actor/{{ $actor->id }}" method="post">
+<form action="/actors/{{ $actor->id }}" method="post">
     @csrf 
     @method('PATCH')
 
@@ -27,9 +27,6 @@
         <div class="control">
             <input type="submit" value="Save" class="button is-link">
         </div>
-        <div class="control">
-            <button class="button is-text">Cancel</button>
-        </div>
     </div>
 
 
@@ -45,13 +42,13 @@
 
 </form>
 
-<form action="/actor/{{ $actor->id }}" method="post" style="margin-top:10px">
+<form action="/actors/{{ $actor->id }}" method="post" style="margin-top:10px" class="is-pulled-right">
     
     @method('DELETE')
     @csrf 
 
-    <div class="field">
-        <div class="control "><input type="submit" value="Delete me!" class="button "></div>
+    <div class="field ">
+        <div class="control "><input type="submit" value="Delete me!" class="button is-danger"></div>
     </div>
 </form>
 

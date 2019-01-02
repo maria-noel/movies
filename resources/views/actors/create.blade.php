@@ -3,7 +3,7 @@
 @section('section-title', 'Create new actor/actress ') 
 @section('content')
 
-<form action="/actor" method="POST">
+<form action="/actors" method="POST">
     @csrf
 
     <div class="field">
@@ -17,16 +17,13 @@
 
     <div class="field">
         <label class="label">Last name</label>
-            <input type="text" class="input" name="last_name" required value="{{ old('last_name') }}">
+        <input type="text" class="input" name="last_name" required value="{{ old('last_name') }}">
     </div>
 
 
     <div class="field is-grouped">
         <div class="control">
             <input type="submit" value="Save" class="button is-link">
-        </div>
-        <div class="control">
-            <button class="button is-text">Cancel</button>
         </div>
     </div>
 
