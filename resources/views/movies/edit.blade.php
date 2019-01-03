@@ -17,22 +17,22 @@
     <div class="columns">
         <div class="column">
             <label for="rating" class="label">Rating</label>
-            <input type="text" name="rating" class="input" required value="{{ old('rating') }}">
+            <input type="text" name="rating" class="input" required value="{{ $movie->rating }}">
         </div>
 
         <div class="column">
             <label for="awards" class="label">Awards</label>
-            <input type="text" name="awards" id="" class="input" required value="{{ old('awards') }}">
+            <input type="text" name="awards" id="" class="input" required value="{{ $movie->awards }}">
         </div>
 
         <div class="column">
             <label for="release_date" class="label">Release date</label>
-            <input type="date" name="release_date" id="" class="input" required value="{{ old('release_date') }}">
+            <input type="date" name="release_date" id="" class="input" required value="{{ Carbon\Carbon::parse($movie->release_date)->format('m/d/Y') }}">
         </div>
 
         <div class="column">
             <label for="length" class="label">Length</label>
-            <input type="number" name="length" id="" class="input" required value="{{ old('length') }}">
+            <input type="number" name="length" id="" class="input" required value="{{ $movie->length }}">
         </div>
 
         <div class="column">
