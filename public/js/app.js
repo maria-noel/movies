@@ -57513,7 +57513,7 @@ var defaultOptions = {
   disabledDates: [],
   disabledWeekDays: undefined,
   lang: 'en', // internationalization
-  dateFormat: 'MM/DD/YYYY',
+  dateFormat: 'YYYY/DD/MM',
   displayMode: 'default',
   showHeader: true,
   showFooter: true,

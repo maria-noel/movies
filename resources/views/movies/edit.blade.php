@@ -1,14 +1,19 @@
 @extends('layouts.app') 
-@section('title', 'Movies ') 
+@section('title', 'movies | Create ') 
+@section('section-title', 'EDIT ') 
 @section('content')
 
-<form action="/movies" method="POST">
-    @csrf
+<form action="/movies/{{ $movie->id }}" method="post">
+    @csrf @method('PATCH')
+
 
     <div class="field">
-        <label for="title" class="label">Title</label>
-        <input type="text" name="title" class="input" required value="{{ old('title') }}">
+        <label class="label">Title</label>
+        <div class="control">
+            <input type="text" class="input" name="title" required value="{{ $movie->title }}">
+        </div>
     </div>
+
     <div class="columns">
         <div class="column">
             <label for="rating" class="label">Rating</label>
@@ -31,25 +36,30 @@
         </div>
 
         <div class="column">
-            <label for="genre" class="label">Genre</label>  
+            <label for="genre" class="label">Genre</label>
             <div class="select is-primary">
                 <select name="genre_id">
-                    <option>Select dropdown</option>
-                    @foreach ($genres as $genre)
-                      <option value="{{ $genre->id }}" > {{ $genre->name }} </option>
-                    @endforeach
-                </select>
+                        <option>Select dropdown</option>
+                        @foreach ($genres as $genre)
+                          <option value="{{ $genre->id }}" 
+                                @if ($genre->id == old('genre_id', $movie->genre_id))
+                                selected="selected"
+                            @endif
+                            > {{ $genre->name }} </option>
+                        @endforeach
+                    </select>
             </div>
         </div>
-
-        <div class="column "></div>
     </div>
+
+
 
     <div class="field is-grouped">
         <div class="control">
             <input type="submit" value="Save" class="button is-link">
         </div>
     </div>
+
 
     @if ($errors->any())
     <div class="notification is-danger">
@@ -60,5 +70,15 @@
         </ul>
     </div>
     @endif
+
+</form>
+
+<form action="/movies/{{ $movie->id }}" method="post" style="margin-top:10px" class="is-pulled-right">
+
+    @method('DELETE') @csrf
+
+    <div class="field ">
+        <div class="control "><input type="submit" value="Delete me!" class="button is-danger"></div>
+    </div>
 </form>
 @endsection

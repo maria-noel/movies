@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Genre;
 use App\Movie;
+use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
+
+    protected $dates = [
+        'release_date',
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +31,9 @@ class MovieController extends Controller
      */
     public function create()
     {
-        return view('movies/create');
+        $genres = Genre::all();
+
+        return view('movies/create', ['genres' => $genres]);
     }
 
     /**
@@ -36,7 +44,23 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+
+
+        // validate
+        $attributes = request()->validate([
+            'title' => ['required', 'min:3'],
+            'rating' => ['nullable', 'numeric'],
+            'awards' => ['nullable', 'numeric'],
+            'length' => ['nullable', 'numeric'],
+            'genre_id' => ['nullable', 'numeric'],
+            'release_date' => ['required', 'date'],
+
+        ]);
+
+        Movie::create($attributes);
+
+        return redirect('/movies');
+
     }
 
     /**
@@ -48,7 +72,7 @@ class MovieController extends Controller
     public function show($id)
     {
         $movie = Movie::find($id);
-       
+
         return view('movies/show', compact('movie'));
 
     }
@@ -61,6 +85,10 @@ class MovieController extends Controller
      */
     public function edit($id)
     {
+        $movie = Movie::find($id);
+        $genres = Genre::all();
+
+        return view('movies/edit', compact('movie', 'genres'));
         //
     }
 

@@ -21,7 +21,7 @@
 
                 </p>
 
-                @if ($movie->genre->count())
+                @if ($movie->genre)
                 <p>
                     <span class=""> <a href="/genres/{{ $movie->genre['id'] }}">{{ $movie->genre['name'] }}</a></span>
                 </p>
