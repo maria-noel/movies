@@ -21,18 +21,23 @@
 
                 </p>
 
-                @if ($actor->movies->count())
+                @if ($actor->favorite_movie_id)
                 <div>
-                    <ul> Actuó en:  
-                        @foreach ($actor->movies as $movie)
+                    <ul> Favorite movie:
                         <li>
-                            {{ $movie->title }}
+                            <a href="/movies/{{ $favorite_movie->id }}">{{ $favorite_movie->title }}</a>
+                        </li>
+                    </ul>
+                </div>
+                @endif @if ($actor->movies->count())
+                <div>
+                    <ul> Actuó en: @foreach ($actor->movies as $movie)
+                        <li>
+                            <a href="/movies/{{ $movie->id }}"> {{ $movie->title }} </a>
                         </li>
                         @endforeach
                     </ul>
                 </div>
-
-
                 @endif
             </div>
 
