@@ -51,12 +51,12 @@
             <label class="label" for="favorite_movie_id">Movies </label>
             <div class="">
                 @foreach ($allMovies as $movie)
-                <form action="/movies/{{ $movie->id }}">
+                {{-- <form action="/movies/{{ $movie->id }}"> --}}
                     @method('PATCH')
-                    <input type="checkbox" name="movie_id[]" value="{{ $movie->id }}"
+                    <input type="checkbox" name="movies[]" value="{{ $movie->id }}"
                     {{ $actor->movies->contains($movie->id) ? 'checked' : '' }}
                     > {{ $movie->title }}
-                </form>
+                {{-- </form> --}}
                 @endforeach
             </div>
         </div>

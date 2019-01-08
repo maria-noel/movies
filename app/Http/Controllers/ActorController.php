@@ -89,15 +89,18 @@ class ActorController extends Controller
      */
     public function update($id)
     {
+        // dd(request()->all());
         $actor = Actor::find($id);
         
           
         $actor->first_name = request('first_name');
         $actor->last_name = request('last_name');
         $actor->rating = request('rating');
+        
         $actor->favorite_movie_id = request('favorite_movie_id');
 
         $actor->save();
+        $actor->movies()->sync(request('movies'));
 
         return redirect('/actors');
     }
