@@ -10,14 +10,14 @@
         <div class="column">
             <label class="label">Name</label>
             <div class="control">
-                <input type="text" class="input" name="first_name" required value="{{ $actor->first_name }}">
+                <input type="text" class="input is-primary" name="first_name" required value="{{ $actor->first_name }}">
             </div>
         </div>
 
         <div class="column">
             <label class="label">Last name</label>
             <div class="control">
-                <input type="text" class="input" name="last_name" required value="{{ $actor->last_name }}">
+                <input type="text" class="input  is-primary" name="last_name" required value="{{ $actor->last_name }}">
             </div>
         </div>
     </div>
@@ -32,14 +32,12 @@
         </div>
         <div class="column is-2">
             <label class="label" for="favorite_movie_id">Favorite movie</label>
-            <div class="select is-primary">
+            <div class="select is-info">
                 <select name="favorite_movie_id">
                     <option>Select dropdown</option>
-                    @foreach ($movies as $movie)
+                    @foreach ($allMovies as $movie)
                        <option value="{{ $movie->id }}" 
-                        @if ($movie->id == old('favorite_movie_id', $actor->favorite_movie_id)) 
-                        selected="selected" 
-                        @endif
+                         {{ $movie->id == old('favorite_movie_id', $actor->favorite_movie_id) ? 'selected' : '' }}
                         > {{ $movie->title }} </option>
                     @endforeach
                 </select>
@@ -48,17 +46,15 @@
 
 
         @if ($actor->movies->count())
+        {{-- {{ dd($actor->movies) }} --}}
         <div class="column is-5">
             <label class="label" for="favorite_movie_id">Movies </label>
             <div class="">
-                @foreach ($movies as $movie)
+                @foreach ($allMovies as $movie)
                 <form action="/movies/{{ $movie->id }}">
                     @method('PATCH')
-                    <label for="movie_id"></label>
-                    <input type="checkbox" name="movie_id"
-                    @if ($movie->id == old('movie_id', $actor->movie_id)) 
-                    checked="checked" 
-                    @endif
+                    <input type="checkbox" name="movie_id[]" value="{{ $movie->id }}"
+                    {{ $actor->movies->contains($movie->id) ? 'checked' : '' }}
                     > {{ $movie->title }}
                 </form>
                 @endforeach
