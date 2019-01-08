@@ -51,11 +51,15 @@
         <div class="column is-5">
             <label class="label" for="favorite_movie_id">Movies </label>
             <div class="">
-                @foreach ($actor->movies as $movie)
+                @foreach ($movies as $movie)
                 <form action="/movies/{{ $movie->id }}">
                     @method('PATCH')
                     <label for="movie_id"></label>
-                    <input type="checkbox" name="movie_id"> {{ $movie->title }}
+                    <input type="checkbox" name="movie_id"
+                    @if ($movie->id == old('movie_id', $actor->movie_id)) 
+                    checked="checked" 
+                    @endif
+                    > {{ $movie->title }}
                 </form>
                 @endforeach
             </div>

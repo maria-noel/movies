@@ -64,8 +64,8 @@ class ActorController extends Controller
     {
         $actor = Actor::find($id);
         $favorite_movie = Movie::find($actor->favorite_movie_id);
-
-        return view('actors/show', compact(['actor', 'favorite_movie']));
+        $movies = Movie::all();
+        return view('actors/show', compact(['actor', 'movies']));
     }
 
     /**
