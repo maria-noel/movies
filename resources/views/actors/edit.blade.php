@@ -45,20 +45,15 @@
         </div>
 
 
-        @if ($actor->movies->count())
-        {{-- {{ dd($actor->movies) }} --}}
+        @if ($actor->movies->count()) {{-- {{ dd($actor->movies) }} --}}
         <div class="column is-5">
-            <label class="label" for="favorite_movie_id">Movies </label>
-            <div class="">
-                @foreach ($allMovies as $movie)
-                {{-- <form action="/movies/{{ $movie->id }}"> --}}
-                    @method('PATCH')
-                    <input type="checkbox" name="movies[]" value="{{ $movie->id }}"
-                    {{ $actor->movies->contains($movie->id) ? 'checked' : '' }}
-                    > {{ $movie->title }}
-                {{-- </form> --}}
-                @endforeach
+            <label class="label" for="favorite_movie_id">Movies </label> @foreach ($allMovies as $movie)
+            <div class="column">
+                @method('PATCH')
+                <input class="" type="checkbox" name="movies[]" value="{{ $movie->id }}" {{ $actor->movies->contains($movie->id)
+                ? 'checked' : '' }} > {{ $movie->title }}
             </div>
+            @endforeach
         </div>
         @endif
 
