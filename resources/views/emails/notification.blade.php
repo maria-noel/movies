@@ -1,0 +1,1 @@
+Mira todas las películas que tenemos <a href="{{ $link }}">{{ $link }}</a>
