@@ -13,11 +13,26 @@
         </div>
     </div>
 
-
-
     <div class="field">
         <label class="label">Last name</label>
         <input type="text" class="input" name="last_name" required value="{{ old('last_name') }}">
+    </div>
+
+    <div class="field">
+        <label class="label">Rating</label>
+        <input type="text" class="input" name="rating" required value="{{ old('rating') }}">
+    </div>
+
+    <div class="field">
+        <label for="genre" class="label">Favorite movie </label>  
+            <div class="select is-primary">
+                <select name="favorite_movie_id">
+                    <option>Select Movie</option>
+                    @foreach ($movies as $movie)
+                      <option value="{{ $movie->id }}" > {{ $movie->title }} </option>
+                    @endforeach
+                </select>
+            </div>
     </div>
 
 

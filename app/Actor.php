@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Movie;
 
 class Actor extends Model
 {
@@ -15,4 +15,13 @@ class Actor extends Model
     }
 
     
+    public function favoriteMovieTitle($id)
+    {
+        $movie = Movie::find($id);
+
+        if ($movie) {
+            return $movie->title;
+        }
+
+    }    
 }

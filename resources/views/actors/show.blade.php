@@ -18,8 +18,14 @@
                 </p>
                 <p>
                     <span class="tag"> Rating </span> {{ $actor->rating }}
-
                 </p>
+
+                @if ($favoriteMovieTitle =  $actor->favoriteMovieTitle($actor->favorite_movie_id))
+                <p>
+                    Película favorita:
+                    <span> {{ $favoriteMovieTitle }} </span>
+                </p>
+                @endif
 
                 @if ($actor->movies->count())
                 <div>

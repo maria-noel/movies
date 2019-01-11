@@ -38,7 +38,7 @@
             </div>
 
         </div>
-        <h6><a href="/movie/{{ $movie->id }}/edit" class="button is-link">Edit</a> </h6>
+        <h6><a href="/movies/{{ $movie->id }}/edit" class="button is-link">Edit</a> </h6>
     </article>
 </div>
 @endsection

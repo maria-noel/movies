@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Actor;
+use App\{Actor, Movie};
 
 class ActorController extends Controller
 {
@@ -26,7 +26,8 @@ class ActorController extends Controller
      */
     public function create()
     {
-        return view('actors/create');
+        $movies = Movie::all();
+        return view('actors/create', compact('movies'));
     }
 
     /**
@@ -37,12 +38,12 @@ class ActorController extends Controller
      */
     public function store()
     {
-
         // validate
        $attributes = request()->validate([
-            'first_name' => ['required', 'min:3'],
-            'last_name' => ['required', 'min:3']
-
+            'first_name' => ['required', 'string', 'min:3', 'max:100'],
+            'last_name' => ['required', 'string', 'min:3', 'max:100'],
+            'rating' =>  ['nullable','numeric'],
+            'favorite_movie_id' => ['nullable', 'numeric']
         ]);
 
         Actor::create($attributes);
@@ -107,5 +108,10 @@ class ActorController extends Controller
 
         return redirect('/actors');
         
+    }
+
+    public function getFavoriteMovie()
+    {
+        return $this->favoriteMovie($this->favorite_movie_id);
     }
 }
