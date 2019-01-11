@@ -61,7 +61,9 @@ class ActorController extends Controller
     public function show($id)
     {
         $actor = Actor::find($id);
-        return view('actors/show', compact('actor'));
+        $favorite_movie = Movie::find($actor->favorite_movie_id);
+        $movies = Movie::all();
+        return view('actors/show', compact(['actor', 'movies', 'favorite_movie']));
     }
 
     /**
@@ -73,7 +75,8 @@ class ActorController extends Controller
     public function edit($id)
     {
         $actor = Actor::find($id);
-        return view('actors/edit', compact('actor'));
+        $allMovies = Movie::all();
+        return view('actors/edit', compact(['actor', 'allMovies']));
     }
 
     /**
@@ -84,12 +87,18 @@ class ActorController extends Controller
      */
     public function update($id)
     {
+        // dd(request()->all());
         $actor = Actor::find($id);
-
+        
+          
         $actor->first_name = request('first_name');
         $actor->last_name = request('last_name');
+        $actor->rating = request('rating');
+        
+        $actor->favorite_movie_id = request('favorite_movie_id');
 
         $actor->save();
+        $actor->movies()->sync(request('movies'));
 
         return redirect('/actors');
     }

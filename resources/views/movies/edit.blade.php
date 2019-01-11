@@ -27,12 +27,12 @@
 
         <div class="column">
             <label for="release_date" class="label">Release date</label>
-            <input type="date" name="release_date" id="" class="input" required value="{{ Carbon\Carbon::parse($movie->release_date)->format('m/d/Y') }}">
+            <input type="date" name="release_date" id="" class="input" required value="{{ Carbon\Carbon::parse($movie->release_date)->format('m/d/Y') }}" placeholder="{{ Carbon\Carbon::parse($movie->release_date)->format('m/d/Y') }}">
         </div>
 
         <div class="column">
             <label for="length" class="label">Length</label>
-            <input type="number" name="length" id="" class="input" required value="{{ $movie->length }}">
+            <input type="number" name="length" id="" class="input" value="{{ $movie->length }}">
         </div>
 
         <div class="column">
