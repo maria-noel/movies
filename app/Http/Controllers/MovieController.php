@@ -14,6 +14,17 @@ class MovieController extends Controller
     ];
 
     /**
+     * Enforce middleware
+     */
+    public function __construct()
+    {
+        $this->middleware('admin', ['only' => ['create', 'store', 'edit', 'delete']]);
+
+        $this->middleware('admin', ['except' => ['index', 'show']]);
+    }
+
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

@@ -2,11 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\{Actor, Movie};
+use App\Actor;
+
+use App\Movie;use Illuminate\Http\Request;
 
 class ActorController extends Controller
 {
+
+    /**
+     * Enforce middleware
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => ['create', 'store', 'edit', 'delete']]);
+
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -39,11 +51,11 @@ class ActorController extends Controller
     public function store()
     {
         // validate
-       $attributes = request()->validate([
+        $attributes = request()->validate([
             'first_name' => ['required', 'string', 'min:3', 'max:100'],
             'last_name' => ['required', 'string', 'min:3', 'max:100'],
-            'rating' =>  ['nullable','numeric'],
-            'favorite_movie_id' => ['nullable', 'numeric']
+            'rating' => ['nullable', 'numeric'],
+            'favorite_movie_id' => ['nullable', 'numeric'],
         ]);
 
         Actor::create($attributes);
@@ -89,12 +101,11 @@ class ActorController extends Controller
     {
         // dd(request()->all());
         $actor = Actor::find($id);
-        
-          
+
         $actor->first_name = request('first_name');
         $actor->last_name = request('last_name');
         $actor->rating = request('rating');
-        
+
         $actor->favorite_movie_id = request('favorite_movie_id');
 
         $actor->save();
@@ -102,21 +113,21 @@ class ActorController extends Controller
 
         return redirect('/actors');
     }
-    
+
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
         $actor = Actor::find($id);
-        
+
         $actor->delete($id);
 
         return redirect('/actors');
-        
+
     }
 
     public function getFavoriteMovie()

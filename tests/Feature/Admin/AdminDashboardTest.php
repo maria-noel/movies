@@ -42,7 +42,7 @@ class AdminDashboardTest extends TestCase
     {
 
         $this->get(route('admin_dashboard'))
-        ->assertStatus(200)
+        ->assertStatus(302)
         ->assertRedirect('login')
         ;
     }

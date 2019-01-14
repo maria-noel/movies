@@ -11,16 +11,13 @@
 |
 */
 
-use Symfony\Component\HttpFoundation\Response;
-
-
 Route::get('/', function () {
     return view('welcome');
 });
 
 
-Route::resource('/actors','ActorController');
-Route::resource('/movies','MovieController');
+Route::resource('/actors','ActorController', ['only' => ['index', 'show']]);
+Route::resource('/movies','MovieController', ['only' => ['index', 'show']]);
 
 Route::get('/genres/{id}','GenreController@show');
 
