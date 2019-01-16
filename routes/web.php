@@ -16,8 +16,8 @@ Route::get('/', function () {
 });
 
 
-Route::resource('/actors','ActorController', ['only' => ['index', 'show']]);
-Route::resource('/movies','MovieController', ['only' => ['index', 'show']]);
+Route::resource('/actors','ActorController');
+Route::resource('/movies','MovieController');
 
 Route::get('/genres/{id}','GenreController@show');
 

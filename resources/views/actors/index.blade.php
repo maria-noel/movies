@@ -15,7 +15,7 @@
         </ul>
     </div>
     
-    @if (auth()->user()->admin)
+    @if (Auth::check() && auth()->user()->admin)
     <div class="column">
         <h1 class="title is-4"><a href="/actors/create" class="button is-link">New actor/actress</a></h1>
     </div>

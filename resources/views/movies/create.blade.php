@@ -31,12 +31,16 @@
         </div>
 
         <div class="column">
-            <label for="genre" class="label">Genre</label>  
+            <label for="genre" class="label">Genre</label>
             <div class="select is-primary">
                 <select name="genre_id">
                     <option>Select dropdown</option>
                     @foreach ($genres as $genre)
-                      <option value="{{ $genre->id }}" > {{ $genre->name }} </option>
+                    @if (Input::old('genre_id') == $genre->id)
+                        <option value="{{ $genre->id  }}" selected>{{ $genre->name }}</option>
+                    @else
+                        <option value="{{ $genre->id }}" > {{ $genre->name }} </option>
+                    @endif
                     @endforeach
                 </select>
             </div>

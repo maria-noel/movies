@@ -22,7 +22,7 @@
         @endforeach
     </div>
 
-    @if (auth()->user()->admin)
+    @if (Auth::check() && auth()->user()->admin)
     <div class="column">
         <h1 class="title is-4"><a href="/movies/create" class="button is-link">New movie</a></h1>
     </div>

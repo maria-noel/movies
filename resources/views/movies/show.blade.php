@@ -38,7 +38,7 @@
             </div>
 
         </div>
-        @if (auth()->user()->admin)
+        @if (Auth::check() && auth()->user()->admin)
         <h6><a href="/movies/{{ $movie->id }}/edit" class="button is-link">Edit</a> </h6>
         @endif
     </article>

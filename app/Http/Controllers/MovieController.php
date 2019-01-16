@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Genre;
+use App\Mail\MovieCreated;
 use App\Movie;
 use Illuminate\Http\Request;
 
@@ -18,11 +19,10 @@ class MovieController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('admin', ['only' => ['create', 'store', 'edit', 'delete']]);
+        $this->middleware(['admin', 'auth'], ['only' => ['create', 'store', 'edit', 'delete']]);
 
-        $this->middleware('admin', ['except' => ['index', 'show']]);
+        // $this->middleware(['admin', 'auth'], ['except' => ['index', 'show']]);
     }
-
 
     /**
      * Display a listing of the resource.
@@ -31,7 +31,16 @@ class MovieController extends Controller
      */
     public function index()
     {
+
         $movies = Movie::all();
+
+        // cache()->rememberForever('stats', function(){
+        //     return ['lessons' => 1300, 'hours' => 5000, 'series' => 100];
+        // });
+        // $stats = cache()->get('stats');
+
+        // dump($stats);
+
         return view('movies/index', compact('movies'));
     }
 
@@ -42,20 +51,21 @@ class MovieController extends Controller
      */
     public function create()
     {
+        // dd('create');
+
         $genres = Genre::all();
 
         return view('movies/create', ['genres' => $genres]);
     }
 
     /**
-     * Store a newly created resource in storage. 
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-
 
         // validate
         $attributes = request()->validate([
@@ -68,7 +78,11 @@ class MovieController extends Controller
 
         ]);
 
-        Movie::create($attributes);
+        $movie = Movie::create($attributes);
+
+        \Mail::to('bacodesign@gmail.com')->send(
+            new MovieCreated($movie)
+        );
 
         return redirect('/movies');
 
@@ -82,10 +96,13 @@ class MovieController extends Controller
      */
     public function show($id)
     {
+        if (! isset($id)) {
+            return redirect('/movies');
+        }
+
         $movie = Movie::find($id);
 
         return view('movies/show', compact('movie'));
-
     }
 
     /**
@@ -100,7 +117,6 @@ class MovieController extends Controller
         $genres = Genre::all();
 
         return view('movies/edit', compact('movie', 'genres'));
-        //
     }
 
     /**
@@ -124,12 +140,10 @@ class MovieController extends Controller
     public function destroy($id)
     {
         $movie = Movie::find($id);
-        
+
         $movie->delete($id);
 
         return redirect('/movies');
-       
 
-        
     }
 }

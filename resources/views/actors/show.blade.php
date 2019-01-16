@@ -3,7 +3,6 @@
 @section('section-title', 'View a particular actor/actress
 ') 
 @section('content')
-
 <div class="box">
     <article class="media">
         <div class="media-left">
@@ -49,7 +48,7 @@
 
         </div>
         
-        @if (auth()->user()->admin)
+        @if (Auth::check() && auth()->user()->admin)
         <h6><a href="/actors/{{ $actor->id }}/edit" class="button is-link">Edit</a> </h6>
         @endif
     </article>
