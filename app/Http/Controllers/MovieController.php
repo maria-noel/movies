@@ -21,7 +21,7 @@ class MovieController extends Controller
     {
         $this->middleware(['admin', 'auth'], ['only' => ['create', 'store', 'edit', 'delete']]);
 
-        // $this->middleware(['admin', 'auth'], ['except' => ['index', 'show']]);
+        $this->middleware(['admin', 'auth'], ['except' => ['index', 'show']]);
     }
 
     /**
@@ -34,13 +34,6 @@ class MovieController extends Controller
 
         $movies = Movie::all();
 
-        // cache()->rememberForever('stats', function(){
-        //     return ['lessons' => 1300, 'hours' => 5000, 'series' => 100];
-        // });
-        // $stats = cache()->get('stats');
-
-        // dump($stats);
-
         return view('movies/index', compact('movies'));
     }
 
@@ -51,7 +44,6 @@ class MovieController extends Controller
      */
     public function create()
     {
-        // dd('create');
 
         $genres = Genre::all();
 
@@ -66,19 +58,7 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-
-        // validate
-        $attributes = request()->validate([
-            'title' => ['required', 'min:3'],
-            'rating' => ['nullable', 'numeric'],
-            'awards' => ['nullable', 'numeric'],
-            'length' => ['nullable', 'numeric'],
-            'genre_id' => ['nullable', 'numeric'],
-            'release_date' => ['required', 'date'],
-
-        ]);
-
-        $movie = Movie::create($attributes);
+        $movie = Movie::create($this->validateMovie());
 
         \Mail::to('bacodesign@gmail.com')->send(
             new MovieCreated($movie)
@@ -126,9 +106,12 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Movie $movie)
     {
-        //
+        
+        $movie->update($this->validateMovie());
+
+        return redirect('/movies');
     }
 
     /**
@@ -146,4 +129,19 @@ class MovieController extends Controller
         return redirect('/movies');
 
     }
+
+
+    protected function validateMovie()
+    {
+        return request()->validate([
+            'title' => ['required', 'min:3'],
+            'rating' => ['nullable', 'numeric'],
+            'awards' => ['nullable', 'numeric'],
+            'length' => ['nullable', 'numeric'],
+            'genre_id' => ['nullable', 'numeric'],
+            'release_date' => ['required', 'date'],
+        ]);
+    }
+
+
 }

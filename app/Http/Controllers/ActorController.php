@@ -99,7 +99,6 @@ class ActorController extends Controller
      */
     public function update($id)
     {
-        // dd(request()->all());
         $actor = Actor::find($id);
 
         $actor->first_name = request('first_name');
