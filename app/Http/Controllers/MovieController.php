@@ -31,7 +31,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-
+       
         $movies = Movie::all();
 
         return view('movies/index', compact('movies'));
@@ -60,9 +60,7 @@ class MovieController extends Controller
     {
         $movie = Movie::create($this->validateMovie());
 
-        \Mail::to('bacodesign@gmail.com')->send(
-            new MovieCreated($movie)
-        );
+        // event
 
         return redirect('/movies');
 
@@ -76,6 +74,8 @@ class MovieController extends Controller
      */
     public function show($id)
     {
+
+
         if (! isset($id)) {
             return redirect('/movies');
         }
