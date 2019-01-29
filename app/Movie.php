@@ -5,23 +5,17 @@ namespace App;
 use App\Mail\MovieCreated;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\Eloquent\Model;
+use App\Events\MovieCreated as MovieCreatedEvent;
 
 class Movie extends Model
 {
     protected $guarded = [];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::created(function($movie){
-            Mail::to('bacodesign@gmail.com')->send(
-                new MovieCreated($movie)
-            );
     
-        });
-    }
-    
+    protected $dispatchesEvents = [
+        'created' => MovieCreatedEvent::class,
+    ];
+
+
     public function genre()
     {
         return $this->belongsTo('App\Genre');

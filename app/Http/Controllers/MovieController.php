@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Genre;
 use App\Mail\MovieCreated;
+use App\Events\MovieCreated as movieCreatedEvent;
 use App\Movie;
 use Illuminate\Http\Request;
 
@@ -59,8 +60,6 @@ class MovieController extends Controller
     public function store(Request $request)
     {
         $movie = Movie::create($this->validateMovie());
-
-        // event
 
         return redirect('/movies');
 
