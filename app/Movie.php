@@ -7,8 +7,10 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\Eloquent\Model;
 use App\Events\MovieCreated as MovieCreatedEvent;
 
+
 class Movie extends Model
 {
+
     protected $guarded = [];
     
     protected $dispatchesEvents = [

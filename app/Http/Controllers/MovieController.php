@@ -7,6 +7,8 @@ use App\Mail\MovieCreated;
 use App\Events\MovieCreated as movieCreatedEvent;
 use App\Movie;
 use Illuminate\Http\Request;
+use App\Notifications\MovieCreationFailed;
+use App\User;
 
 class MovieController extends Controller
 {
@@ -32,7 +34,10 @@ class MovieController extends Controller
      */
     public function index()
     {
-       
+        $user = User::first();
+        
+        $user->notify(new MovieCreationFailed);
+
         $movies = Movie::all();
 
         return view('movies/index', compact('movies'));
