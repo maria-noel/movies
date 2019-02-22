@@ -63,7 +63,7 @@ Accederlo:
 docker-compose exec {container-name} bash
 ```
 
-Si hay problemas con las migraciones
+dockerSi hay problemas con las migraciones
 Acceder con 
 ```
 docker-compose exec mysql bash
