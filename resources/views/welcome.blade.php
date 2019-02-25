@@ -26,48 +26,7 @@
 
 <body>
 
-    <!-- START NAV -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="../">
-                {{ config('app.name') }}
-                        </a>
-                <span class="navbar-burger burger" data-target="navbarMenu">
-                            <span></span>
-                <span></span>
-                <span></span>
-                </span>
-            </div>
-            <div id="navbarMenu" class="navbar-menu">
-                <div class="navbar-end">
-                    <a class="navbar-item is-active">
-                                Home
-                            </a>
-                    <a href="movies" class="navbar-item">Movies</a>
-                    <a href="actors" class="navbar-item">Actors</a>
-
-                    @if (Route::has('login'))
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            @if (Auth::check())
-                                <a href="{{ url('/home') }}" class="navbar-link">Home</a>
-                            @else
-                                <div class="navbar-dropdown">
-                                    <a href="{{ url('/login') }}" class="navbar-link">Login</a>
-                                    <a href="{{ url('/register') }}" class="navbar-link">Register</a> 
-                                    <div class="navbar-item">
-                                        Logout
-                                    </div>
-                                </div>
-                            @endif
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </nav>
-    <!-- END NAV -->
-
+    @include('partials.header')
 
     <div class="container">
         <div id="flow">
@@ -267,23 +226,7 @@
             </div>
         </div>
 
-        {{-- footer --}}
-        <footer class="footer">
-            <div class="container">
-                <div class="content has-text-centered">
-                    <div class="soc">
-                        <a href="#"><i class="fa fa-github-alt fa-2x" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-youtube fa-2x" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
-                    </div>
-                    <p>
-                        <strong>Bulma</strong> by <a href="http://jgthms.com">Jeremy Thomas</a>. The source code is licensed
-                        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. <br>
-                    </p>
-                </div>
-            </div>
-        </footer>
+       @include('partials.footer')
 
         <script src="/js/app.js"></script>
 </body>

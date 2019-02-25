@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Notifications\MovieCreationFailed;
 use App\User;
 
+
 class MovieController extends Controller
 {
 
@@ -36,9 +37,9 @@ class MovieController extends Controller
     {
         $user = User::first();
         
-        $user->notify(new MovieCreationFailed);
+        // $user->notify(new MovieCreationFailed);
 
-        $movies = Movie::all();
+        $movies = Movie::paginate(5);
 
         return view('movies/index', compact('movies'));
     }
