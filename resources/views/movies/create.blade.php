@@ -9,6 +9,7 @@
         <label for="title" class="label">Title</label>
         <input type="text" name="title" class="input" required value="{{ old('title') }}">
     </div>
+
     <div class="columns">
         <div class="column">
             <label for="rating" class="label">Rating</label>
@@ -46,9 +47,31 @@
             </div>
         </div>
 
-        <div class="column "></div>
+    </div>
+    
+    <div class="field "> 
+        <form action="" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="file has-name ">
+                <label class="file-label">
+                    <input class="file-input" type="file" name="resume" id="file">
+                    <span class="file-cta">
+                        <span class="file-icon">
+                            <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+                            Choose a file…
+                        </span>
+                    </span>
+                    {{-- <span class="file-name">
+                        Screen Shot 2017-07-29 at 15.54.25.png
+                    </span> --}}
+                </label>
+            </div>
+        </form>
     </div>
 
+    <br>
     <div class="field is-grouped">
         <div class="control">
             <input type="submit" value="Save" class="button is-link">
