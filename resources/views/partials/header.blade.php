@@ -13,26 +13,23 @@
             </div>
             <div id="navbarMenu" class="navbar-menu">
                 <div class="navbar-end">
-                    <a class="navbar-item is-active">
-                                Home
-                            </a>
-                    <a href="movies" class="navbar-item">Movies</a>
-                    <a href="actors" class="navbar-item">Actors</a>
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <a href="movies" class="navbar-item">Movies</a>
+                            <a href="actors" class="navbar-item">Actors</a>
 
-                    @if (Route::has('login'))
-                        <div class="navbar-item has-dropdown is-hoverable">
+                            @if (Route::has('login'))
                             @if (Auth::check())
-                                <a href="{{ url('/home') }}" class="navbar-link">Home</a>
+                            <a href="{{ url('/home') }}" class="navbar-item">Home</a>
+                        <a href=" {{ url('/logout') }}" class="navbar-item">
+                                Logout
+                        </a>
                             @else
-                                <div class="navbar-dropdown">
-                                    <a href="{{ url('/login') }}" class="navbar-link">Login</a>
-                                    <a href="{{ url('/register') }}" class="navbar-link">Register</a> 
-                                    <div class="navbar-item">
-                                        Logout
-                                    </div>
+                                <div class="navbar-item has-dropdown">
+                                    <a href="{{ url('/login') }}" class="navbar-item">Login</a>
+                                    <a href="{{ url('/register') }}" class="navbar-item">Register</a> 
                                 </div>
                             @endif
-                        </div>
                     @endif
                 </div>
             </div>

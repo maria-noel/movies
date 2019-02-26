@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/logout', function(){
+    Auth::logout();
+    return redirect('/');
+});
 
 Route::resource('/actors','ActorController');
 Route::resource('/movies','MovieController');
