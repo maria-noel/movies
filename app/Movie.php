@@ -29,4 +29,9 @@ class Movie extends Model
         return $this->belongsToMany(Actor::class);
     }
 
+    public function images()
+    {
+        return $this->belongsToMany('App\Image');
+    }
+
 }

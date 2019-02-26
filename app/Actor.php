@@ -25,4 +25,9 @@ class Actor extends Model
         }
 
     }    
+
+    public function images()
+    {
+        return $this->belongsToMany('App\Images')->withTimestamps();
+    }
 }
