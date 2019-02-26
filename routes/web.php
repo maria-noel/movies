@@ -29,6 +29,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
+// Image upload
+Route::post('image-upload', 'ImageUploadController@imageUploadPost')->name('image.upload');
+
 
 Route::get('/admin', function(){
    
