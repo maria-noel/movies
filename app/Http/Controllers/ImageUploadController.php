@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Image;
+
 
 class ImageUploadController extends Controller
 {
@@ -12,10 +14,10 @@ class ImageUploadController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // public function imageUpload()
-    // {
-    //     return view('imageUpload');
-    // }
+    public function imageUpload()
+    {
+        return view('images/index');
+    }
 
 /**
 
@@ -27,9 +29,8 @@ class ImageUploadController extends Controller
 
      */
 
-    public function imageUploadPost()
+    public function imageUploadPost(Request $request)
     {
-        dd($_REQUEST);
         request()->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -37,10 +38,17 @@ class ImageUploadController extends Controller
         $imageName = time().'.'.request()->image->getClientOriginalExtension();
         request()->image->move(public_path('images'), $imageName);
 
+        $data = ['src' => public_path('images'). $imageName  ];
+
+        // Save in database
+        $img = Image::create($data);
+
         return back()
             ->with('success','You have successfully upload image.')
             ->with('image',$imageName);
     }
+
+    
 
 
 

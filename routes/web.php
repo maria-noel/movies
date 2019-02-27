@@ -30,7 +30,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 // Image upload
-Route::post('image-upload', 'ImageUploadController@imageUploadPost')->name('image.upload');
+Route::get('image-upload', 'ImageUploadController@imageUpload')->name('image.upload');
+Route::post('image-upload', 'ImageUploadController@imageUploadPost')->name('image.upload.post');
 
 
 Route::get('/admin', function(){
