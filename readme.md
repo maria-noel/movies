@@ -25,7 +25,7 @@ Editar los archivos de configuración en Apache2.
 
 ```
 cd /var/www/laradock/
-cp apache2/sample.conf.example cinemania.conf
+cp apache2/sites/sample.conf.example cinemania.conf
 ```
 
 Configurar la base de datos:
